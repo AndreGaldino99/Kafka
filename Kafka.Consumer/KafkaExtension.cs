@@ -24,6 +24,7 @@ public static class KafkaExtension
                 {
                     try
                     {
+                        await Task.Delay(1000);
                         await ConsumerClass.Consume(c, cts);
                     }
                     catch (ConsumeException e)

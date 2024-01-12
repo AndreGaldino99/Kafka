@@ -12,7 +12,7 @@ namespace Kafka.Consumer
             string messageValue = string.Empty;
             try
             {
-                var cr = c.Consume(5);
+                var cr = c.Consume(cts.Token);
                 messageValue = cr.Message.Value.ToString() ?? "";
                 messageValue.SendAsync();
             }
