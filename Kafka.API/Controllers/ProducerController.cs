@@ -16,7 +16,7 @@ namespace Kafka.API.Controllers
             _producerService.Produce(messages);
             return Ok();
         }
-        
+
         [HttpPost]
         //public IActionResult Produce(Message<Null, string> messages)
         public IActionResult Produce(string message)

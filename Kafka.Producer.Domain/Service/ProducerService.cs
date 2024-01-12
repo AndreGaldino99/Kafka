@@ -12,7 +12,7 @@ namespace Kafka.Producer.Domain.Service
             BootstrapServers = KafkaUtils.BootstrapServer
         };
 
-        public async Task Produce(List<Message<Null, string>>  messages)
+        public async Task Produce(List<Message<Null, string>> messages)
         {
             using (var producer = new ProducerBuilder<Null, string>(_config).Build())
             {
