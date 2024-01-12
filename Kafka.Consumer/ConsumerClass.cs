@@ -27,33 +27,31 @@ namespace Kafka.Consumer
     {
         public static async void SendAsync(this string jsonData)
         {
-            using (HttpClient client = new HttpClient())
+            using HttpClient client = new();
+            string apiUrl = "https://localhost:7045/api/ProcessLog";
+            try
             {
-                string apiUrl = "https://localhost:7045/api/ProcessLog";
-                try
+                HttpResponseMessage response = await client.PostAsync(apiUrl, new StringContent(jsonData, Encoding.UTF8, "application/json"));
+                if (response.IsSuccessStatusCode)
                 {
-                    HttpResponseMessage response = await client.PostAsync(apiUrl, new StringContent(jsonData, Encoding.UTF8, "application/json"));
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string content = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine(content);
-                    }
-                    else
-                    {
-                        await jsonData.ProduceError(response.ReasonPhrase ?? "");
-                    }
+                    string content = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(content);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine($"Erro: {ex.Message}");
+                    await jsonData.ProduceError(response.ReasonPhrase ?? "");
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro: {ex.Message}");
             }
         }
     }
 
     public static class _00000000000_SendError
     {
-        public static IProducer<Null, string> _producerBuild =
+        private readonly static IProducer<Null, string> _producerBuild =
             new ProducerBuilder<Null, string>(new ProducerConfig
             {
                 BootstrapServers = KafkaUtils.BootstrapServer,

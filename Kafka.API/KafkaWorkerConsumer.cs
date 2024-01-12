@@ -4,20 +4,16 @@ using Kafka.Utils;
 
 namespace Kafka.API
 {
-    public class KafkaWorkerConsumer : BackgroundService
+    public class KafkaWorkerConsumer(ILogger<KafkaWorkerConsumer> logger) : BackgroundService
     {
-        private readonly ILogger<KafkaWorkerConsumer> _logger;
-        private readonly ConsumerConfig _conf = new ConsumerConfig
+        private readonly ILogger<KafkaWorkerConsumer> _logger = logger;
+
+        private readonly ConsumerConfig _conf = new()
         {
             GroupId = "test-consumer-group",
             BootstrapServers = KafkaUtils.BootstrapServer,
             AutoOffsetReset = AutoOffsetReset.Earliest
         };
-
-        public KafkaWorkerConsumer(ILogger<KafkaWorkerConsumer> logger)
-        {
-            _logger = logger;
-        }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {

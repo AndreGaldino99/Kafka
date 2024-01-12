@@ -21,9 +21,10 @@ namespace Kafka.API.Controllers
         //public IActionResult Produce(Message<Null, string> messages)
         public IActionResult Produce(string message)
         {
-            var messages = new List<Message<Null, string>>();
-
-            messages.Add(new Message<Null, string> { Value = $"Mensagem {message}" });
+            var messages = new List<Message<Null, string>>
+            {
+                new() { Value = $"Mensagem {message}" }
+            };
 
             _producerService.Produce(messages);
             return Ok();
