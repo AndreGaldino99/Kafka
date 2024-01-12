@@ -2,32 +2,31 @@
 using Kafka.Producer.Domain.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Kafka.API.Controllers
+namespace Kafka.API.Controllers;
+
+[Route("/api/v1/[controller]")]
+[ApiController]
+public class ProducerController(IProducerService producerService) : ControllerBase
 {
-    [Route("/api/v1/[controller]")]
-    [ApiController]
-    public class ProducerController(IProducerService producerService) : Controller
+    private readonly IProducerService _producerService = producerService;
+
+    [HttpPost("/ProducerMultiple")]
+    public IActionResult ProduceMultiple(List<Message<Null, string>> messages)
     {
-        private readonly IProducerService _producerService = producerService;
+        _producerService.Produce(messages);
+        return Ok();
+    }
 
-        [HttpPost("/ProducerMultiple")]
-        public IActionResult ProduceMultiple(List<Message<Null, string>> messages)
+    [HttpPost]
+    //public IActionResult Produce(Message<Null, string> messages)
+    public IActionResult Produce(string message)
+    {
+        var messages = new List<Message<Null, string>>
         {
-            _producerService.Produce(messages);
-            return Ok();
-        }
+            new() { Value = $"Mensagem {message}" }
+        };
 
-        [HttpPost]
-        //public IActionResult Produce(Message<Null, string> messages)
-        public IActionResult Produce(string message)
-        {
-            var messages = new List<Message<Null, string>>
-            {
-                new() { Value = $"Mensagem {message}" }
-            };
-
-            _producerService.Produce(messages);
-            return Ok();
-        }
+        _producerService.Produce(messages);
+        return Ok();
     }
 }

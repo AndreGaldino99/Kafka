@@ -2,28 +2,27 @@
 using Kafka.Consumer;
 using Kafka.Utils;
 
-namespace Kafka.API
+namespace Kafka.API;
+
+public class KafkaWorkerConsumer(ILogger<KafkaWorkerConsumer> logger) : BackgroundService
 {
-    public class KafkaWorkerConsumer(ILogger<KafkaWorkerConsumer> logger) : BackgroundService
+    private readonly ILogger<KafkaWorkerConsumer> _logger = logger;
+
+    private readonly ConsumerConfig _conf = new()
     {
-        private readonly ILogger<KafkaWorkerConsumer> _logger = logger;
+        GroupId = "test-consumer-group",
+        BootstrapServers = KafkaUtils.BootstrapServer,
+        AutoOffsetReset = AutoOffsetReset.Earliest
+    };
 
-        private readonly ConsumerConfig _conf = new()
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
         {
-            GroupId = "test-consumer-group",
-            BootstrapServers = KafkaUtils.BootstrapServer,
-            AutoOffsetReset = AutoOffsetReset.Earliest
-        };
+            await _conf.ExecuteKafka();
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                await _conf.ExecuteKafka();
-
-                _logger.LogInformation("Worker em execução às: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
-            }
+            _logger.LogInformation("Worker em execução às: {time}", DateTimeOffset.Now);
+            await Task.Delay(1000, stoppingToken);
         }
     }
 }
