@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.API", "Kafka.API\Kafka.API.csproj", "{0B5F2FDB-4EBB-40A3-8C83-EAE6BC281BCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.Consumer", "Kafka.Consumer\Kafka.Consumer.csproj", "{0E1B379F-0508-4871-AF9B-EB2E77636CCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.Utils", "Kafka.Utils\Kafka.Utils.csproj", "{FCCDD491-16A0-434A-9690-71DDCD470F71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B5F2FDB-4EBB-40A3-8C83-EAE6BC281BCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B5F2FDB-4EBB-40A3-8C83-EAE6BC281BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B5F2FDB-4EBB-40A3-8C83-EAE6BC281BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B5F2FDB-4EBB-40A3-8C83-EAE6BC281BCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E1B379F-0508-4871-AF9B-EB2E77636CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E1B379F-0508-4871-AF9B-EB2E77636CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E1B379F-0508-4871-AF9B-EB2E77636CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E1B379F-0508-4871-AF9B-EB2E77636CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCCDD491-16A0-434A-9690-71DDCD470F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCCDD491-16A0-434A-9690-71DDCD470F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCCDD491-16A0-434A-9690-71DDCD470F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCCDD491-16A0-434A-9690-71DDCD470F71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB3899D5-9AA5-4D31-86E5-3DB8D7AB4DB5}
+	EndGlobalSection
+EndGlobal
